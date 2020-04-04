@@ -69,42 +69,49 @@ export default class ShelterMap extends Component {
 
 
 var markersOnMap = [{
-        placeName: "Australia (Uluru)",
+        placeName: "Chitra ",
         LatLng: [{
-            lat: -25.344,
-            lng: 131.036
+            lat: 23.078091,
+            lng: 72.575790
         }],
-        icon : iconBase + 'parking_lot_maps.png'
+     //   icon : iconBase + 'parking_lot_maps.png'
     },
     {
-        placeName: "Australia (Melbourne)",
+        placeName: "Het",
         LatLng: [{
-            lat: -37.852086,
-            lng: 504.985963
+            lat: 23.105036,
+            lng: 72.594759
         }]
     },
     {
-        placeName: "Australia (Canberra)",
+        placeName: "Chitra",
         LatLng: [{
-            lat: -35.299085,
-            lng: 509.109615
+            lat: 23.092582,
+            lng: 72.599781
         }],
-         icon : iconBase + 'parking_lot_maps.png'
+      ///   icon : iconBase + 'parking_lot_maps.png'
     },
     {
-        placeName: "Australia (Gold Coast)",
+        placeName: "Chitra",
         LatLng: [{
-            lat: -28.013044,
-            lng: 513.425586
+            lat: 23.081212,
+            lng: 72.592442
         }]
     },
     {
-        placeName: "Australia (Perth)",
+        placeName: "Het",
         LatLng: [{
-            lat: -31.951994,
-            lng: 475.858081
+            lat: 23.008767,
+            lng: 72.594995
         }]
-    }
+    },
+    {
+      placeName: "Chitra",
+      LatLng: [{
+          lat: 23.001696,
+          lng: 72.552810
+      }]
+  }
 ];
 
     this.setState({ shelters: markersOnMap });

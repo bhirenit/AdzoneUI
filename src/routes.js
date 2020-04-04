@@ -34,10 +34,14 @@ import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import UserForm from "views/UserProfile/UserForm.js";
+import MyTableAdzone from "views/UserProfile/MyTableAdzone.js";
+import NewMap from "views/UserProfile/NewMap.js";
+import Graph from "views/UserProfile/Graph.js";
 import AddProduct from "views/UserProfile/AddProduct.js";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 import Email from "components/Email";
+
 
 
 const dashboardRoutes = [
@@ -46,7 +50,7 @@ const dashboardRoutes = [
     name: "Dashboard",
     rtlName: "لوحة القيادة",
     icon: Dashboard,
-    component: DashboardPage,
+    component: MyTableAdzone,
     layout: "/publicity"
   },
   {
@@ -64,25 +68,25 @@ const dashboardRoutes = [
     name: "View Product",
     rtlName: "قائمة الجدول",
     icon: "content_paste",
-    component: TableList,
+    component: MyTableAdzone,
     // component: ViewProduct,
     layout: "/publicity"
   },
+  // {
+  //   path: "/report",
+  //   name: "Report",
+  //   rtlName: "طباعة",
+  //   icon: LibraryBooks,
+  //   // component: Typography,
+  //   component: NotificationsPage,
+  //   layout: "/publicity"
+  // },
   {
-    path: "/report",
-    name: "Report",
-    rtlName: "طباعة",
-    icon: LibraryBooks,
-    // component: Typography,
-    component: Email,
-    layout: "/publicity"
-  },
-  {
-    path: "/viewfeedback",
-    name: "View Feedback",
+    path: "/email",
+    name: "Email",
     rtlName: "الرموز",
     icon: BubbleChart,
-    component: Icons,
+    component: Email,
     layout: "/publicity"
   },
   {
@@ -94,11 +98,11 @@ const dashboardRoutes = [
     layout: "/publicity"
   },
   {
-    path: "/addoffers",
-    name: "Add Offers",
+    path: "/report1",
+    name: "Report",
     rtlName: "إخطارات",
     icon: Notifications,
-    component: NotificationsPage,
+    component: Graph,
     layout: "/publicity"
   },
   // {

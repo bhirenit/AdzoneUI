@@ -6,8 +6,8 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-
-
+import Map1 from "views/UserProfile/Map1.js";
+import NewMap from "views/UserProfile/NewMap.js";
 import { InputBox, CheckBox, MyRadio, DropDown } from './InputBox';
 import { Label, FormGroup, Input, Form } from 'reactstrap';
 import server from 'utilities.js';
@@ -188,13 +188,21 @@ class AddProduct extends Component {
         console.log(name, this.state.formData[name])
         formDataProduct.set(name, this.state.formData[name]);
       }
-      console.log(`http://${server.ip}:${server.port}/product/addProduct`);
+    //  console.log(`http://${server.ip}:${server.port}/product/addProduct`);
       axios.post(`http://${server.ip}:${server.port}/product/addProduct`, formDataProduct, config)
         .then(res => alert("File uploaded successfully."))
         .catch((err) => console.log(err));
     }
   }
 
+  getAddHandler=(e)=>{
+    const {name,value}= e.target;
+    const {formData}=this.state;
+    let formDataObj = formData;
+    formDataObj = { ...formData, [name]: value }
+console.log(name,"******7777*******************************");
+    this.setState({ [name]:value });
+  }
   render() {
     const { formError, formData } = this.state
     return (
@@ -209,7 +217,11 @@ class AddProduct extends Component {
 							<p className={classes.cardCategoryWhite}>Complete your product details</p> */}
               </CardHeader>
               <CardBody>
-                <br />
+  
+              <br />              
+              <NewMap getAddHandler={this.getAddHandler}/>
+              <br/>
+              <br/>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={3}>
                     <InputBox
