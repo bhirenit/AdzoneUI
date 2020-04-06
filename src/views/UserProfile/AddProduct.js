@@ -13,6 +13,8 @@ import { Label, FormGroup, Input, Form } from 'reactstrap';
 import server from 'utilities.js';
 import 'scss/my-scss.scss';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faMapMarked, faMapMarkerAlt, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 class AddProduct extends Component {
   constructor(props) {
@@ -258,10 +260,6 @@ class AddProduct extends Component {
 							<p className={classes.cardCategoryWhite}>Complete your product details</p> */}
               </CardHeader>
               <CardBody>
-
-                <br />
-
-                <br />
                 <br />
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={3}>
@@ -376,15 +374,13 @@ class AddProduct extends Component {
 
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <InputBox
-                      type='button'
-                      value='map'
-                      onClick={this.handlerMap}
-                    />
+                    <Button onClick={this.handlerMap} ><FontAwesomeIcon icon={faMapMarkerAlt} /></Button>
                   </GridItem>
-
                 </GridContainer>
-                {map && <><NewMap handleMapDetails={this.handleMapDetails} /><br /><br /></>}
+
+                <br />
+                {map && <div ><NewMap handleMapDetails={this.handleMapDetails} /><br /><br /><br /></div>}
+
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
                     <InputBox

@@ -171,7 +171,7 @@ class UserForm extends Component {
 					<Card>
 						<CardHeader color="primary">
 
-							<h4 className>Edit Profile</h4>
+							<h4 className>Sign Up</h4>
 							<p className>Complete your product details</p>
 							{/* <h4 className={classes.cardTitleWhite}>Add Product</h4>
 							<p className={classes.cardCategoryWhite}>Complete your product details</p> */}

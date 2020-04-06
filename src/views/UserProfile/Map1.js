@@ -244,22 +244,6 @@ class Map1 extends React.Component {
     if (this.props.center.lat !== undefined) {
       map = <div>
         <div>
-          {/* <div className="form-group">
-            <label htmlFor="">City</label>
-            <input type="text" name="city" className="form-control" onChange={this.onChange} onBlur={this.get} value={this.state.city} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="">Area</label>
-            <input type="text" name="location" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.area} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="">State</label>
-            <input type="text" name="state" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.state} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="">Address</label>
-            <input type="text" name="landmark" className="form-control" onChange={this.props.get} readOnly="readOnly" value={this.state.address} />
-          </div> */}
         </div>
         <AsyncMap
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeWwZ3gDRU13z6jiQRTuhFkA3ugQG_Q7Q&libraries=places"
