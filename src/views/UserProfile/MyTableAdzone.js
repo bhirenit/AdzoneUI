@@ -4,6 +4,9 @@ import 'react-table/react-table.css';
 import axios from "axios";
 import { Container } from "reactstrap";
 import server from 'utilities.js';
+import { Icon, Button } from "@material-ui/core";
+import ViewProductCard from "./ViewProductCard";
+
 
 class MyTableAdzone extends Component {
     dummyData = [];
@@ -11,8 +14,10 @@ class MyTableAdzone extends Component {
         super(props);
         this.state = {
             searchInput: '',
-            user: []
+            user: [],
+            isListView: true
         }
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
@@ -49,6 +54,10 @@ class MyTableAdzone extends Component {
        // const filterData = this.dummyData.filter(item => Object.keys(item).some(value => item[value].toString().includes(search)));
         this.setState({ user: filterData });
     }
+    
+    handleClick = (e) => {
+        this.setState({isListView: !this.state.isListView});
+      }
 
     render() {
 
@@ -75,15 +84,23 @@ class MyTableAdzone extends Component {
 
         return (
             <Container className="table-container">
+                <center>
+                <Button onClick={this.handleClick} justIcon round color="primary"><Icon className="fa fa-id-card-o" /></Button></center>
+                { this.state.isListView && (<>
                 <label >Search :</label>
                 <input type="text" onChange={this.changeSearch} /><br /><br />
-
+              
                 <ReactTable
                     data={user}
                     columns={columns}
                     defaultPageSize={10}
                     pageSizeOptions={[10, 20]}
-                />
+                /></>)}
+                    {!this.state.isListView &&  
+                    <ViewProductCard 
+                         data = {user}
+                    />
+                    }
             </Container>
         )
     }
