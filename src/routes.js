@@ -42,7 +42,46 @@ import AddProduct from "views/UserProfile/AddProduct.js";
 import RTLPage from "views/RTLPage/RTLPage.js";
 import Email from "components/Email";
 
+export const adminRoutes = [
+]
 
+export const customerRoutes = [
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: MyTableAdzone,
+    layout: "/customer"
+  }, {
+    path: "/product",
+    name: "My Product",
+    rtlName: "لوحة القيادة",
+    icon: "add_to_photos",
+    component: MyTableAdzone,
+    layout: "/customer"
+  }, {
+    path: "/view-product",
+    name: "View Product",
+    rtlName: "لوحة القيادة",
+    icon: "content_paste",
+    component: MyTableAdzone,
+    layout: "/customer"
+  }, {
+    path: "/map",
+    name: "Map",
+    rtlName: "لوحة القيادة",
+    icon: LocationOn,
+    component: MyTableAdzone,
+    layout: "/customer"
+  }, {
+    path: "/notification",
+    name: "Notification",
+    rtlName: "لوحة القيادة",
+    icon: Notifications,
+    component: MyTableAdzone,
+    layout: "/customer"
+  }]
 
 const dashboardRoutes = [
   {

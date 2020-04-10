@@ -13,11 +13,14 @@ import { Label, FormGroup, Input, Form } from 'reactstrap';
 import server from 'utilities.js';
 import 'scss/my-scss.scss';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faMapMarked, faMapMarkerAlt, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 class AddProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      map: false,
       formData: {
         sku: '',
         category: '',
@@ -96,12 +99,47 @@ class AddProduct extends Component {
       { value: "jamnagar", label: "Jamnagar" }
     ];
   }
+
   onFileChangeHandler = (e) => {
     e.preventDefault();
     this.setState({
       selectedFile: e.target.files[0]
     });
   };
+
+  handleMapDetails = (mapObj) => {
+    const { address, city, area, state, mapPosition } = mapObj;
+    let fromObj = this.state.formData;
+    // let obj1 = {
+    //   address: '',
+    //   city: '',
+    //   area: '',
+    //   state: '',
+    //   mapPosition: {
+    //     lat: this.props.center.lat,
+    //     lng: this.props.center.lng
+    //   },
+    //   markerPosition: {
+    //     lat: this.props.center.lat,
+    //     lng: this.props.center.lng
+    //   }
+    // }
+    console.log("mapDeatils", mapObj);
+    let tempObj = {
+      location: address,
+      city: city,
+      locality: area,
+      state: state,
+      landmark: area,
+      lat: mapPosition.lat,
+      lng: mapPosition.lng
+    }
+    Object.keys(tempObj).map((key) => {
+      fromObj[key] = tempObj[key];
+    })
+    this.setState({ formData: fromObj });
+
+  }
 
   dataHandler = (e) => {
     const { formData, formError } = this.state;
@@ -140,6 +178,7 @@ class AddProduct extends Component {
         return /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
     }
   }
+
   validationHandler = (e) => {
     const { formData, formError } = this.state;
     const { name, value, title, attributes } = e.target;
@@ -188,23 +227,27 @@ class AddProduct extends Component {
         console.log(name, this.state.formData[name])
         formDataProduct.set(name, this.state.formData[name]);
       }
-    //  console.log(`http://${server.ip}:${server.port}/product/addProduct`);
+      //  console.log(`http://${server.ip}:${server.port}/product/addProduct`);
       axios.post(`http://${server.ip}:${server.port}/product/addProduct`, formDataProduct, config)
         .then(res => alert("File uploaded successfully."))
         .catch((err) => console.log(err));
     }
   }
 
-  getAddHandler=(e)=>{
-    const {name,value}= e.target;
-    const {formData}=this.state;
+  handlerMap = () => {
+    this.setState({ map: !this.state.map });
+  }
+
+  getAddHandler = (e) => {
+    const { name, value } = e.target;
+    const { formData } = this.state;
     let formDataObj = formData;
     formDataObj = { ...formData, [name]: value }
-console.log(name,"******7777*******************************");
-    this.setState({ [name]:value });
+    console.log(name, "******7777*******************************");
+    this.setState({ [name]: value });
   }
   render() {
-    const { formError, formData } = this.state
+    const { formError, formData, map } = this.state
     return (
       <>
         <GridContainer>
@@ -217,11 +260,7 @@ console.log(name,"******7777*******************************");
 							<p className={classes.cardCategoryWhite}>Complete your product details</p> */}
               </CardHeader>
               <CardBody>
-  
-              <br />              
-              <NewMap getAddHandler={this.getAddHandler}/>
-              <br/>
-              <br/>
+                <br />
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={3}>
                     <InputBox
@@ -332,6 +371,15 @@ console.log(name,"******7777*******************************");
                     </FormGroup>
                   </GridItem>
                 </GridContainer>
+
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <Button onClick={this.handlerMap} ><FontAwesomeIcon icon={faMapMarkerAlt} /></Button>
+                  </GridItem>
+                </GridContainer>
+
+                <br />
+                {map && <div ><NewMap handleMapDetails={this.handleMapDetails} /><br /><br /><br /></div>}
 
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
