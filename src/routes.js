@@ -38,10 +38,12 @@ import MyTableAdzone from "views/UserProfile/MyTableAdzone.js";
 import NewMap from "views/UserProfile/NewMap.js";
 import Graph from "views/UserProfile/Graph.js";
 import AddProduct from "views/UserProfile/AddProduct.js";
+import MapView from "publicity/map/MapView"
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 import Email from "components/Email";
-
+import ViewProductCard from "views/UserProfile/ViewProductCard";
+import ViewProductCardDetails from "product/ViewProductCardDetails"
 
 
 const dashboardRoutes = [
@@ -70,6 +72,23 @@ const dashboardRoutes = [
     icon: "content_paste",
     component: MyTableAdzone,
     // component: ViewProduct,
+    layout: "/publicity"
+  },
+  {
+    path: "/card-view-product",
+    name: "Your Products",
+    rtlName: "قائمة الجدول",
+    icon: "content_paste",
+    component: ViewProductCard,
+    // component: ViewProduct,
+    layout: "/publicity"
+  },
+  {
+    path: "/view-product-details",
+    name: "View Product Details",
+    rtlName: "إخطارات",
+    icon: Notifications,
+    component: ViewProductCardDetails,
     layout: "/publicity"
   },
   // {
@@ -105,6 +124,16 @@ const dashboardRoutes = [
     component: Graph,
     layout: "/publicity"
   },
+ 
+  // {
+  //   path: "/map-view",
+  //   name: "Map View",
+  //   rtlName: "قائمة الجدول",
+  //   icon: LocationOn,
+  //   component: MapView,
+  //   // component: ViewProduct,
+  //   layout: "/publicity"
+  // },
   // {
   //   path: "/rtl-page",
   //   name: "RTL Support",

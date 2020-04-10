@@ -61,13 +61,15 @@ const Maps = compose(
     </StandaloneSearchBox>
     
     <ol>
-      { 
-      props.places.map(
-        ({ place_id, formatted_address, geometry: { location } }) => (
-            <ShelterMap lat={location.lat()} lng= {location.lng()}  />
+      { props.places[0] &&
+      <ShelterMap lat = {props.places[0].geometry.location.lat()}
+       lng= {props.places[0].geometry.location.lng()} /> }
+      {/* // props.places.map(
+      //   ({ place_id, formatted_address, geometry: { location } }) => (
+      //       <ShelterMap lat={location.lat()} lng= {location.lng()}  />
         
-        )
-      )}
+      //   )
+      // )} */}
     </ol>
   </div>
 ));

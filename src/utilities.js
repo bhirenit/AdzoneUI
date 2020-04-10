@@ -1,5 +1,5 @@
 const server={
-  ip:'192.168.25.6',
+  ip:'localhost',
   port:'5002'
 }
 export default server;
