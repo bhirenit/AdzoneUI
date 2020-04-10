@@ -22,6 +22,7 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
+import ShoppingBasket from "@material-ui/icons/ShoppingBasket"
 import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
@@ -44,6 +45,8 @@ import MapView from "publicity/map/MapView"
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 import Email from "components/Email";
+import ViewProductDetails from "product/ViewProductDetails";
+import AdzoneCart from "customer/AdzoneCart";
 
 export const adminRoutes = [
 ]
@@ -84,6 +87,14 @@ export const customerRoutes = [
     icon: Notifications,
     component: MyTableAdzone,
     layout: "/customer"
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    rtlName: "rtl",
+    icon: ShoppingBasket,
+    component: AdzoneCart,
+    layout: "/customer"
   }]
 
 const dashboardRoutes = [
@@ -123,14 +134,14 @@ const dashboardRoutes = [
     // component: ViewProduct,
     layout: "/publicity"
   },
-  {
-    path: "/view-product-details",
-    name: "View Product Details",
-    rtlName: "إخطارات",
-    icon: Notifications,
-    component: ViewProductCardDetails,
-    layout: "/publicity"
-  },
+  // {
+  //   path: "/view-product-details",
+  //   name: "View Product Details",
+  //   rtlName: "إخطارات",
+  //   icon: Notifications,
+  //   component: ViewProductDetails,
+  //   layout: "/publicity"
+  // },
   // {
   //   path: "/report",
   //   name: "Report",

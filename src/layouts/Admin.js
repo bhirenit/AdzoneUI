@@ -21,6 +21,7 @@ import AddProduct from "views/UserProfile/AddProduct";
 import EditProfile from 'components/EditProfile';
 import UserForm from "views/UserProfile/UserForm";
 import Email from "components/Email";
+import ViewProductDetails from "product/ViewProductDetails";
 // import { isPropertySignature } from "typescript";
 
 let ps;
@@ -32,6 +33,7 @@ const switchRoutes = (
     {/* http://localhost:3000/publicity/report?productId=1&publicityId=1&email=chavdagunjan01@gmail.com */}
     {/* <Route path="/publicity/report/:productId&:publicityId&:email" component={Email} /> */}
     <Route path="/publicity/report" component={Email} />
+    <Route path="/publicity/view-product/:productId" component={ViewProductDetails} />
 
     
     <Route path="/publicity/profile/edit" component={UserForm} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -20,8 +20,34 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ViewProductCardDetails() {
+export default function ViewProductCardDetails(props) {
   const classes = useStyles();
+  const [to,setTo] = useState(new Date().toString());
+  const [from,setFrom] = useState()
+ console.log(props);
+
+  const fromHandler = (e)=>{ 
+    setTo(e.target.value);
+  }
+  const toHandler = (e)=>{
+    setFrom(e.target.value);
+  }
+
+  
+
+  const addToCart = ()=>{
+      const json =localStorage.getItem("cartData");
+      let cartData = JSON.parse(json);
+      if(cartData){
+          cartData.push(props.data.id);
+      }
+      else{
+          cartData = [];
+          cartData.push(props.data.id);
+      }
+      localStorage.setItem("cartData",JSON.stringify(cartData));
+     props.history.push("/customer/dashboard");
+  }
 
   return (
     <center>
@@ -30,49 +56,49 @@ export default function ViewProductCardDetails() {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={`http://${server.ip}:${server.port}/product/image/2`}
+          image={`http://${server.ip}:${server.port}/product/image/${props.data.id}`}
         //   image={"/adzoneImages/"+props.data.sku+".jpg"}
-       //   title={props.data.publicityName}
-            title = "Chitra"
+            title={props.data.publicityName}
+          //  title = "Chitra"
             style = {{height: "360px", width: "100%"}}
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="h6">
             {/* Publicity Name : {props.data.publicityName} */}
-            SKU : H_05
+            SKU : {props.data.sku}
           </Typography>
           <Typography gutterBottom variant="h6" component="h6">
             {/* Publicity Name : {props.data.publicityName} */}
-            Publicity Name : Chitra
+            Publicity Name : {props.data.publicityName}
           </Typography> <Typography gutterBottom variant="h6" component="h6">
             {/* Publicity Name : {props.data.publicityName} */}
-            Category : Outdoor
+            Category : {props.data.category}
           </Typography> <Typography gutterBottom variant="h6" component="h6">
             {/* Publicity Name : {props.data.publicityName} */}
-            Media Type : HOARDING
+            Media Type : {props.data.mediaType}
           </Typography> 
           <Typography gutterBottom variant="h6" component="h6">
             {/* Publicity Name : {props.data.publicityName} */}
-            Rate Per Month : 54000 Rs
+            Rate Per Month : {props.data.ratePerMonth}
           </Typography>
           <Typography gutterBottom variant="body2" color="textSecondary" component="p">
-            Tier : 2
+            Tier : {props.data.tier}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {/* Product size : {props.data.size} */}
-            Product size : 10 X 12 (feet)
+            Product size : {props.data.sizex} X {props.data.sizey} (feet)
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Address : New C.G. Road, Chandkheda
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+            Address :{props.data.locality}
           </Typography>
 
         <InputBox
 										label='From'
 										type='date'
 										name='from'
-										isReq={true}
+                    isReq={true}
+                    defaultValue={from}
+                    onChange={fromHandler}
 										// errorMessage={formError.email}
 										// onChange={this.dataHandler}
 										// onBlur={this.validationHandler}
@@ -81,7 +107,9 @@ export default function ViewProductCardDetails() {
 										label='To'
 										type='date'
 										name='to'
-										isReq={true}
+                    isReq={true}
+                    defaultValue={to}
+                    onChange= {toHandler}
 										// errorMessage={formError.email}
 										// onChange={this.dataHandler}
 										// onBlur={this.validationHandler}
@@ -92,8 +120,8 @@ export default function ViewProductCardDetails() {
         <Ratings isReadOnly={true} value={4}  />
         </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          <Button size="large" style= {{backgroundColor: "#663300", color: "white" }} >
-         BUY NOW
+          <Button onClick={addToCart} size="large" style= {{backgroundColor: "#663300", color: "white" }} >
+         Add to Cart
         </Button>
         </Typography>
        

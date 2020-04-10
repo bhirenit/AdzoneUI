@@ -17,6 +17,8 @@ import GridItem from "components/Grid/GridItem";
 import GridContainer from "components/Grid/GridContainer";
 import { Icon } from "@material-ui/core";
 import Muted from "components/Typography/Muted";
+import { Link } from "react-router-dom";
+import AdzoneCard from "./AdzoneCard";
 
 const styles = {
   ...cardImagesStyles,
@@ -39,9 +41,11 @@ class ViewProductCard extends Component {
         this.state = {
             data : []
         }
+        //this.buttonClick = this.buttonClick.bind(this)
     }
 
     componentDidMount() {
+
         
         // axios.get(`http://${server.ip}:${server.port}/customer/home-listing`)
         //     .then(response => {
@@ -60,8 +64,12 @@ class ViewProductCard extends Component {
         // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000},
         // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000},
         // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000}]});
-        this.setState({data : this.props.data});
+     //   this.setState({data : this.props.data});
+        this.dummyData = this.props.data;
     }
+
+
+  
     // filterForTable = (response) => {
     //     response.map((obj) => {
     //         Object.keys(obj).filter((key) => {
@@ -91,11 +99,12 @@ class ViewProductCard extends Component {
             <>
             <Container>
               <GridContainer> 
-            { this.state.data.map(prod =>{
+            { this.props.data.map(prod =>{
+                const link = "/publicity/view-product/"+prod.id;
                // const classes = useStyles();
                 return (
                     <GridItem>
-                <Card style={{ width: "20rem" }} >
+                {/* <Card style={{ width: "20rem" }} >
                     <img
                    // className={classes.cardImgTop}
                     data-src="F://adzoneImages/h5.jpg"
@@ -114,10 +123,12 @@ class ViewProductCard extends Component {
                         </center>
                     </p>
                     <center>
-                    <Button color="success">View Product</Button>
+                    <Button color="success"> <Link style={{color:"white"}} to={link}>View Product</Link>
+                    </Button>
                     </center>
                     </CardBody>
-                </Card>
+                </Card> */}
+                <AdzoneCard prod = {prod} link={link} {...this.props} />
                 </GridItem>
                 )
             })}

@@ -22,6 +22,7 @@ class MyTableAdzone extends Component {
 
     componentDidMount() {
         const {user}=this.state;
+     //   console.log(this.props);
         axios.get(`http://${server.ip}:${server.port}/customer/home-listing`)
             .then(response => {
                 console.log("response***", response);
@@ -99,6 +100,7 @@ class MyTableAdzone extends Component {
                     {!this.state.isListView &&  
                     <ViewProductCard 
                          data = {user}
+                         {...this.props}
                     />
                     }
             </Container>
