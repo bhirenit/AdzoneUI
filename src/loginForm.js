@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SwitchCameraIcon from '@material-ui/icons/SwitchCamera';
 import { DropDown } from 'views/UserProfile/InputBox';
+import axios from 'axios';
+import server from 'utilities';
 
 function Copyright() {
   return (
@@ -51,20 +53,49 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const [user, setUser] = useState(2);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   const userList = [
 			{ value: 1, label: "Publicity" },
 			{ value: 2, label: "Customer" },
       ];
+   
 
+  const submitHandler = (e) =>{
+    e.preventDefault();
+    const data = {};
+    data.email= email;
+    data.role = user;
+    data.password = password;
+    axios.post(`http://${server.ip}:${server.port}/login`, data)
+      .then(res =>{
+        if(res.status===200){
+          console.log("Response of login ",res);
+          localStorage.setItem("userData",res.data);
+          alert("Welcome "+res.data.userName);
+        }
+        else if(res.status===203){
+          alert("Invalid Credentials");
+        }
+        else if(res.status===404){
+           alert("User not Found"); 
+        }
+        else{
+          alert("Some Error occurred. If this is issue comes again and again please contact us at adzonefeedback@gmail.com")
+        }
+    })
+      .catch((err) => console.log(err));
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
        {user==1?(<Avatar className={classes.avatar} onClick={() => {user==1?setUser(2):setUser(1)}}>
-          <SwitchCameraIcon />
+          <SwitchCameraIcon  />
         </Avatar>):
         (<Avatar className={classes.avatar} onClick={() => {user==1?setUser(2):setUser(1)}}>
-          <LockOutlinedIcon />
+          <LockOutlinedIcon  />
         </Avatar>)}
         <Typography component="h1" variant="h5" onClick={() => {user==1?setUser(2):setUser(1)}}  >
        {/* <DropDown
@@ -87,6 +118,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange= {(e) => {setEmail(e.target.value)}}
           />
           <TextField
             variant="outlined"
@@ -98,17 +130,17 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange= {(e) => {setPassword(e.target.value)}}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            onClick= {submitHandler}
           >
             Sign In
           </Button>
