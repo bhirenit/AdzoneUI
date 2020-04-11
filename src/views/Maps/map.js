@@ -45,8 +45,17 @@ const styles = {
 const useStyles = makeStyles(styles);
 let history = useHistory();
 
-function handleClick(){
- history.push("/viewproduct"); //todo , add view product component link here
+
+function handleClick(id){
+  const userData = JSON.parse(localStorage.getItem("userData"))
+  if(userData.role === 1){
+    history.push("/publicity/view-product/"+id);
+  }else if(userData.role ===2){
+     history.push("/customer/view-product/"+id); //todo , add view product component link here
+  }
+  else{
+
+  }
 }
 
   return (
@@ -105,7 +114,7 @@ function handleClick(){
                     <h6 style={{backgroundColor: "green", color: "white"}}>Available </h6>}
                     {marker.status === "reserved" && 
                      <h6 style={{backgroundColor: "red", color: "white"}}> Reserved </h6>}
-                    <Button color="primary" onClick ={handleClick}  >View Product</Button>
+                    <Button color="primary" onClick ={handleClick(marker.id)}  >View Product</Button>
                   </CardBody>
                 </Card>
                 </Container>
