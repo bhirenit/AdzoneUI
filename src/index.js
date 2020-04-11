@@ -36,7 +36,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/customer" component={Customer} />
       <Route path="/publicity" component={Admin} />
-      <Route pathi="/admin" component={Maintainer}/>
+      <Route path="/admin" component={Maintainer}/>
       <Route path="/login" component= {SignIn} />
       <Route path="/rtl" component={RTL} />
       <Redirect from="/" to="/publicity/dashboard" />

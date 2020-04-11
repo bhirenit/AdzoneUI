@@ -47,7 +47,7 @@ const switchRoutes = (
       }
 
     })}
-    <Redirect from="/publicity" to="/publicity/dashboard" />
+    <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
 );
 

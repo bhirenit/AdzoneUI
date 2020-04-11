@@ -47,6 +47,9 @@ import RTLPage from "views/RTLPage/RTLPage.js";
 import Email from "components/Email";
 import ViewProductDetails from "product/ViewProductDetails";
 import AdzoneCart from "customer/AdzoneCart";
+import AdminViewProductCard from "Admin/AdminViewProductCard.js";
+import AdminAdzoneCard from "Admin/AdminAdzoneCard.js";
+import Admin from "layouts/Admin";
 
 export const adminRoutes = [
   {
@@ -54,9 +57,10 @@ export const adminRoutes = [
     name: "Dashboard",
     rtlName: "لوحة القيادة",
     icon: Dashboard,
-    component: MyTableAdzone,
+    component: AdminViewProductCard,
     layout: "/admin"
-  }, {
+  },
+  {
     path: "/verify-publicity",
     name: "My Product",
     rtlName: "لوحة القيادة",
