@@ -18,8 +18,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Shop';
+import Shop from '@material-ui/icons/Shop';
+import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import Axios from 'axios';
+import server from 'utilities';
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
@@ -170,11 +173,19 @@ const EnhancedTableToolbar = (props) => {
       )}
 
       {numSelected > 0 ? (
+          <>
         <Tooltip title="Buy">
           <IconButton aria-label="shop">
-            <DeleteIcon />
+            <Shop onClick={props.buyProducts} />
           </IconButton>
         </Tooltip>
+
+        <Tooltip title="Delete">
+        <IconButton aria-label="delte">
+          <DeleteIcon onClick={props.deleteProducts} />
+        </IconButton>
+      </Tooltip>
+      </>
       ) : (
         <Tooltip title="Filter list">
           <IconButton aria-label="filter list">
@@ -188,6 +199,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  buyProducts: PropTypes.func.isRequired
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -271,6 +283,36 @@ export default function DataTable(props) {
     setDense(event.target.checked);
   };
 
+  const buyProducts = () => {
+    let data = [];
+    const user = JSON.parse(localStorage.getItem("userData"));
+    data.customerId = user.id;
+    data.productIdList = selected;
+    props.remove(selected);
+    const cartData = JSON.parse(localStorage.getItem("cartData"));
+    Axios.post(`http://${server.ip}:${server.port}/product/buyProducts`,data)
+    .then(res => {
+        console.log("response***", res);
+        alert(res.data);
+    })
+    .catch(error => console.log(error));
+    props.remove(selected);
+
+  };
+
+  const deleteProducts = () => {
+    //const json  = JSON.parse(localStorage.getItem("cartData"));
+    //let cartData = [...new Set(json)];
+    // cartData=cartData.filter((data)=>
+    // selected.indexOf(data)===-1
+    //   );
+    // console.log(cartData);
+    // localStorage.setItem("cartData",JSON.stringify(cartData));
+    
+    props.remove(selected);
+    
+};
+
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.data.length - page * rowsPerPage);
@@ -278,7 +320,7 @@ export default function DataTable(props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} deleteProducts={deleteProducts} buyProducts={buyProducts} />
         <TableContainer>
           <Table
             className={classes.table}

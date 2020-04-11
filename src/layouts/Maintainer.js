@@ -11,7 +11,7 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
-import routes from "routes.js";
+import { adminRoutes } from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -21,7 +21,6 @@ import AddProduct from "views/UserProfile/AddProduct";
 import EditProfile from 'components/EditProfile';
 import UserForm from "views/UserProfile/UserForm";
 import Email from "components/Email";
-import ViewProductDetails from "product/ViewProductDetails";
 // import { isPropertySignature } from "typescript";
 
 let ps;
@@ -32,16 +31,13 @@ const switchRoutes = (
 
     {/* http://localhost:3000/publicity/report?productId=1&publicityId=1&email=chavdagunjan01@gmail.com */}
     {/* <Route path="/publicity/report/:productId&:publicityId&:email" component={Email} /> */}
-    <Route path="/publicity/report" component={Email} />
-    <Route path="/publicity/view-product/:productId" component={ViewProductDetails} />
 
-    
     <Route path="/publicity/profile/edit" component={UserForm} />
-    {routes.map((prop, key) => {
-      if (prop.layout === "/publicity") {
+    {adminRoutes.map((prop, key) => {
+      if (prop.layout === "/admin") {
         return (
           <Route
-            path={"/publicity" + prop.path}
+            path={"/admin" + prop.path}
             component={prop.component}
             key={key}
             ip={prop.ip}
@@ -58,7 +54,7 @@ const switchRoutes = (
 
 const useStyles = makeStyles(styles);
 
-export default function Admin({ ...rest }) {
+export default function Maintainer({ ...rest }) {
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -94,15 +90,6 @@ export default function Admin({ ...rest }) {
       setMobileOpen(false);
     }
   };
-  const getText = () => {
-    try {
-      let userData = JSON.parse(localStorage.getItem("userData"))
-    }
-    catch(err) {
-      document.getElementById("demo").innerHTML = err.message;
-    }
-        
-  }
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -124,7 +111,7 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes}
+        routes={adminRoutes}
         logoText={"adzone"}
         logo={logo}
         image={image}
@@ -135,7 +122,7 @@ export default function Admin({ ...rest }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-          routes={routes}
+          routes={adminRoutes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />

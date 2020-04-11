@@ -49,6 +49,29 @@ import ViewProductDetails from "product/ViewProductDetails";
 import AdzoneCart from "customer/AdzoneCart";
 
 export const adminRoutes = [
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: MyTableAdzone,
+    layout: "/admin"
+  }, {
+    path: "/verify-publicity",
+    name: "My Product",
+    rtlName: "لوحة القيادة",
+    icon: "add_to_photos",
+    component: MyTableAdzone,
+    layout: "/admin"
+  }, 
+  {
+    path: "/verify-product",
+    name: "My Product",
+    rtlName: "لوحة القيادة",
+    icon: "add_to_photos",
+    component: MyTableAdzone,
+    layout: "/admin"
+  }, 
 ]
 
 export const customerRoutes = [
