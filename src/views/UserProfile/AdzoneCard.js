@@ -5,6 +5,7 @@ import Muted from "components/Typography/Muted";
 import { Link } from "react-router-dom";    
 import { Icon } from "@material-ui/core";
 import Button from "components/CustomButtons/Button.js";
+import server from 'utilities';
 
 export default function AdzoneCard(props) {
 
@@ -16,7 +17,7 @@ export default function AdzoneCard(props) {
             data-src="F://adzoneImages/h5.jpg"
             alt="100%x180"
             style={{ height: "180px", width: "100%", display: "block" }}
-            src={"/adzoneImages/"+prod.sku+".jpg"}
+            src={`http://${server.ip}:${server.port}/product/image/${prod.id}`}
             data-holder-rendered="true"
             />
             <CardBody>

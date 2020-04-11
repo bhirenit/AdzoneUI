@@ -47,6 +47,7 @@ import RTLPage from "views/RTLPage/RTLPage.js";
 import Email from "components/Email";
 import ViewProductDetails from "product/ViewProductDetails";
 import AdzoneCart from "customer/AdzoneCart";
+import MyProducts from "customer/MyProducts";
 
 export const adminRoutes = [
   {
@@ -58,7 +59,7 @@ export const adminRoutes = [
     layout: "/admin"
   }, {
     path: "/verify-publicity",
-    name: "My Product",
+    name: "Verify Publcities",
     rtlName: "لوحة القيادة",
     icon: "add_to_photos",
     component: MyTableAdzone,
@@ -66,7 +67,7 @@ export const adminRoutes = [
   }, 
   {
     path: "/verify-product",
-    name: "My Product",
+    name: "Verify Products",
     rtlName: "لوحة القيادة",
     icon: "add_to_photos",
     component: MyTableAdzone,
@@ -84,10 +85,10 @@ export const customerRoutes = [
     layout: "/customer"
   }, {
     path: "/product",
-    name: "My Product",
+    name: "My Products",
     rtlName: "لوحة القيادة",
     icon: "add_to_photos",
-    component: MyTableAdzone,
+    component: MyProducts,
     layout: "/customer"
   }, {
     path: "/view-product",
@@ -101,14 +102,7 @@ export const customerRoutes = [
     name: "Map",
     rtlName: "لوحة القيادة",
     icon: LocationOn,
-    component: MyTableAdzone,
-    layout: "/customer"
-  }, {
-    path: "/notification",
-    name: "Notification",
-    rtlName: "لوحة القيادة",
-    icon: Notifications,
-    component: MyTableAdzone,
+    component: Maps,
     layout: "/customer"
   },
   {

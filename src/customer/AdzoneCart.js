@@ -82,17 +82,12 @@ class AdzoneCart extends Component {
          "products" : buyList
         };
         console.log("BuY LIST :" + JSON.stringify(reqData));
-        // Axios.post(`http://${server.ip}:${server.port}/product/buy-products`,)
-        // .then(res => {
-        //     console.log("response***", res);
-        //     this.setState({ data: res.data },()=>{
-        //         const {data}=this.state;
-        //         this.dummyData=data;
-        //         // console.log(this.dummyData);
-        //     })
-            
-        // })
-        // .catch(error => console.log(error));
+        Axios.post(`http://${server.ip}:${server.port}/product/buy-products`,)
+        .then(res => {
+            console.log("response***", res);
+            alert(JSON.stringify(res.data));
+        })
+        .catch(error => console.log(error));
         localStorage.setItem("cartData",JSON.stringify(cartData));
         let products = this.state.data;
         products = products.filter((prod)=>

@@ -18,7 +18,6 @@ import GridContainer from "components/Grid/GridContainer";
 import { Icon } from "@material-ui/core";
 import Muted from "components/Typography/Muted";
 import { Link } from "react-router-dom";
-import AdzoneCard from "./AdzoneCard";
 
 const styles = {
   ...cardImagesStyles,
@@ -34,7 +33,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-class ViewProductCard extends Component {
+class ViewCard extends Component {
     dummyData = [];
     constructor(props) {
         super(props);
@@ -81,31 +80,32 @@ class ViewProductCard extends Component {
                // const classes = useStyles();
                 return (
                     <GridItem>
-                {/* <Card style={{ width: "20rem" }} >
-                    <img
-                   // className={classes.cardImgTop}
-                    data-src="F://adzoneImages/h5.jpg"
-                    alt="100%x180"
-                    style={{ height: "180px", width: "100%", display: "block" }}
-                    src={"/adzoneImages/"+prod.sku+".jpg"}
-                    data-holder-rendered="true"
-                    />
-                    <CardBody>
-                    <p>
-                        <center>
-                    <Icon className="fa fa-user-o" style={{ fontSize: 10, color: "blue" }}></Icon> {prod.outdoor.toUpperCase()}
-                        <Muted>{prod.mediaType}</Muted>
-                        <label style={{color: "red"}}>{prod.location} </label><br></br>
-                        <Icon className="fa fa-inr" style={{ fontSize: 10, color: "green" }}></Icon>{prod.ratePerMonth}
-                        </center>
-                    </p>
-                    <center>
-                    <Button color="success"> <Link style={{color:"white"}} to={link}>View Product</Link>
-                    </Button>
-                    </center>
-                    </CardBody>
-                </Card> */}
-                <AdzoneCard prod = {prod} link={link} {...this.props} />
+                <Card style={{ width: "20rem" }} >
+            <img
+            // className={classes.cardImgTop}
+            data-src="F://adzoneImages/h5.jpg"
+            alt="100%x180"
+            style={{ height: "180px", width: "100%", display: "block" }}
+            src={`http://${server.ip}:${server.port}/product/image/${prod.id}`}
+            data-holder-rendered="true"
+            />
+            <CardBody>
+            <p>
+                <center>
+            <Icon className="fa fa-user-o" style={{ fontSize: 10, color: "blue" }}></Icon> {prod.publicityName.toUpperCase()}
+                <Muted>{prod.mediaType}</Muted>
+                <label style={{color: "red"}}>{prod.location} </label><br></br>
+                <Icon className="fa fa-inr" style={{ fontSize: 10, color: "green" }}></Icon>{prod.ratePerMonth}
+                </center>
+            </p>
+            <center>
+                <div>
+            <Button color="success">Reserved</Button>
+            </div>
+            </center>
+            </CardBody>
+            </Card>
+                {/* <AdzoneCard prod = {prod} link={link} {...this.props} /> */}
                 </GridItem>
                 )
             })}
@@ -116,4 +116,4 @@ class ViewProductCard extends Component {
     }
 }
 
-export default ViewProductCard;
+export default ViewCard;
