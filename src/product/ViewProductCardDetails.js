@@ -32,21 +32,57 @@ export default function ViewProductCardDetails(props) {
   const toHandler = (e)=>{
     setFrom(e.target.value);
   }
+ 
 
+  const isCustomer = () =>{
+    const str = localStorage.getItem("userData");
+    if(str){
+        let user = JSON.parse(str);
+        if(user.role===2){
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+    }
+    else
+    {
+      return true;
+    }
+  }
+  
   
 
   const addToCart = ()=>{
+      if(to && from){
       const json =localStorage.getItem("cartData");
-      let cartData = JSON.parse(json);
-      if(cartData){
-          cartData.push(props.data.id);
+      let temp = {};
+      temp.id = props.data.id;
+      temp.from = from;
+      temp.to = to;
+      let cartData = [] ;
+      if(json){
+          cartData = JSON.parse(json);
+          
+          cartData.push(temp);
       }
       else{
-          cartData = [];
-          cartData.push(props.data.id);
+          cartData.push(temp);
+      }
+      const stringBuyData = localStorage.getItem("buyData")
+      let buyData = []
+      if(stringBuyData){
+        buyData = JSON.parse(stringBuyData);
+        
+        buyData.push()
       }
       localStorage.setItem("cartData",JSON.stringify(cartData));
      props.history.push("/customer/dashboard");
+    }
+    else{
+      alert("select From and To date");
+    }
   }
 
   return (
@@ -120,9 +156,15 @@ export default function ViewProductCardDetails(props) {
         <Ratings isReadOnly={true} value={4}  />
         </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
+            { isCustomer() &&
           <Button onClick={addToCart} size="large" style= {{backgroundColor: "#663300", color: "white" }} >
          Add to Cart
-        </Button>
+            </Button> }
+            { !isCustomer() &&
+             <Button size="large" style= {{backgroundColor: "#663300", color: "white" }} >
+               {props.data.status}
+            </Button> 
+            }
         </Typography>
        
         </CardContent>

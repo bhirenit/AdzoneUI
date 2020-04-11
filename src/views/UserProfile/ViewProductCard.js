@@ -39,68 +39,49 @@ class ViewProductCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data : []
+            data : [],
+            viewLink : '/customer/view-product/'
         }
         //this.buttonClick = this.buttonClick.bind(this)
     }
 
     componentDidMount() {
-
         
-        // axios.get(`http://${server.ip}:${server.port}/customer/home-listing`)
-        //     .then(response => {
-        //         console.log("response***", response);
-        //         this.setState({ data: response.data },()=>{
-        //             const {user}=this.state;
-        //             this.dummyData=user;
-        //             // console.log(this.dummyData);
-        //         })
-                
-        //     })
-        //     .catch(error => console.log(error));
-        // this.setState({data : [{image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000},
-        // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000},
-        // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000},
-        // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000},
-        // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000},
-        // {image: "F:/adzoneImages/h5.jpg", publicityName: "Chitra", mediaType:"Hoarding", locality: "Chandkheda", price: 2000}]});
-     //   this.setState({data : this.props.data});
+        const str = localStorage.getItem("userData");
+        if(str){
+            let user = JSON.parse(str);
+            if(user.role===2){
+              this.setState({viewLink: "/customer/view-product/" });
+            }
+            else
+            {
+              this.setState({viewLink: "/publicity/view-product/" });
+            }
+        }
+        else
+        {
+          return true;
+        }
+
         this.dummyData = this.props.data;
     }
 
 
-  
-    // filterForTable = (response) => {
-    //     response.map((obj) => {
-    //         Object.keys(obj).filter((key) => {
-    //             // key ===  | 
-    //         })
-    //     })
-    // }
-
-    // componentDidMount() {
-    // 	this.dummyData = this.state.user;
-    // }
+    isCustomer(){
+       
+      }
 
 
     render() {
         return (
-            // <Container className="table-container">
-            //     <label >Search :</label>
-            //     <input type="text" onChange={this.changeSearch} /><br /><br />
-
-            //     <ReactTable
-            //         data={user}
-            //         columns={columns}
-            //         defaultPageSize={10}
-            //         pageSizeOptions={[10, 20]}
-            //     />
-            // </Container>
+           
             <>
             <Container>
               <GridContainer> 
             { this.props.data.map(prod =>{
-                const link = "/publicity/view-product/"+prod.id;
+               
+                    const link = this.state.viewLink +""+prod.id;
+
                // const classes = useStyles();
                 return (
                     <GridItem>

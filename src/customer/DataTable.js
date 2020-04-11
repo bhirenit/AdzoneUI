@@ -284,19 +284,21 @@ export default function DataTable(props) {
   };
 
   const buyProducts = () => {
-    let data = [];
-    const user = JSON.parse(localStorage.getItem("userData"));
-    data.customerId = user.id;
-    data.productIdList = selected;
-    props.remove(selected);
-    const cartData = JSON.parse(localStorage.getItem("cartData"));
-    Axios.post(`http://${server.ip}:${server.port}/product/buyProducts`,data)
-    .then(res => {
-        console.log("response***", res);
-        alert(res.data);
-    })
-    .catch(error => console.log(error));
-    props.remove(selected);
+    props.removeAndBuy(selected);
+    
+    // let data = [];
+    // const user = JSON.parse(localStorage.getItem("userData"));
+    // data.customerId = user.id;
+    // data.productIdList = selected;
+    // props.remove(selected);
+    // const cartData = JSON.parse(localStorage.getItem("cartData"));
+    // Axios.post(`http://${server.ip}:${server.port}/product/buyProducts`,data)
+    // .then(res => {
+    //     console.log("response***", res);
+    //     alert(res.data);
+    // })
+    // .catch(error => console.log(error));
+    // props.remove(selected);
 
   };
 

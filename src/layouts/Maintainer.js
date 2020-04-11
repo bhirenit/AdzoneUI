@@ -31,6 +31,7 @@ const switchRoutes = (
 
     {/* http://localhost:3000/publicity/report?productId=1&publicityId=1&email=chavdagunjan01@gmail.com */}
     {/* <Route path="/publicity/report/:productId&:publicityId&:email" component={Email} /> */}
+    <Route path="/publicity/report" component={Email} />
 
     <Route path="/publicity/profile/edit" component={UserForm} />
     {adminRoutes.map((prop, key) => {
@@ -47,7 +48,7 @@ const switchRoutes = (
       }
 
     })}
-    <Redirect from="/publicity" to="/publicity/dashboard" />
+    <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
 );
 
@@ -55,6 +56,24 @@ const switchRoutes = (
 const useStyles = makeStyles(styles);
 
 export default function Maintainer({ ...rest }) {
+  //uncomment this for login
+
+//   let userData = localStorage.getItem("userData");
+//   if(userData){
+//     let user = JSON.parse(userData);
+//     if(user.role===1)
+//       rest.history.push("/admin/dashboard");
+//     else if(user.role===0)
+//       console.log("right");
+//     else if(user.role===2)
+//       rest.history.push("/customer/dashboard")
+//     else    
+//       rest.history.push("/login");
+// }
+// else{
+//   alert("login First")
+//   rest.history.push("/login");
+// }
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -112,7 +131,7 @@ export default function Maintainer({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={adminRoutes}
-        logoText={"adzone"}
+        logoText={"ADMIN"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

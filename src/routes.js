@@ -148,15 +148,6 @@ const dashboardRoutes = [
     // component: ViewProduct,
     layout: "/publicity"
   },
-  {
-    path: "/card-view-product",
-    name: "Your Products",
-    rtlName: "قائمة الجدول",
-    icon: "content_paste",
-    component: ViewProductCard,
-    // component: ViewProduct,
-    layout: "/publicity"
-  },
   // {
   //   path: "/view-product-details",
   //   name: "View Product Details",

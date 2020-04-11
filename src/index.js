@@ -28,6 +28,8 @@ import "assets/css/material-dashboard-react.css?v=1.8.0";
 import Customer from "layouts/Customer";
 import SignIn from "loginForm";
 import Maintainer from "layouts/Maintainer";
+import Login from "login";
+import UserForm from "views/UserProfile/UserForm";
 
 const hist = createBrowserHistory();
 
@@ -36,10 +38,12 @@ ReactDOM.render(
     <Switch>
       <Route path="/customer" component={Customer} />
       <Route path="/publicity" component={Admin} />
-      <Route pathi="/admin" component={Maintainer}/>
-      <Route path="/login" component= {SignIn} />
+      <Route path="/admin" component={Maintainer}/>
+      <Route path="/login" component= {Login} />
+      <Route path="/publicity-sign-up" component = {UserForm} />
+      <Route path="/customer-sign-up" component = {UserForm} />
       <Route path="/rtl" component={RTL} />
-      <Redirect from="/" to="/publicity/dashboard" />
+      <Redirect from="/" to="/login" />
 
     </Switch>
   </Router>,

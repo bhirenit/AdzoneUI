@@ -59,6 +59,24 @@ const switchRoutes = (
 const useStyles = makeStyles(styles);
 
 export default function Admin({ ...rest }) {
+  
+
+  let userData = localStorage.getItem("userData");
+  if(userData){
+      let user = JSON.parse(userData);
+      if(user.role===1)
+         console.log("right");
+      else if(user.role===0)
+         rest.history.push("/publicity/dashboard")
+      else if(user.role===2)
+         rest.history.push("/customer/dashboard")
+      else    
+        rest.history.push("/login");
+  }
+  else{
+    alert("login First")
+    rest.history.push("/login");
+  }
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -125,7 +143,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"adzone"}
+        logoText={"Publicity"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

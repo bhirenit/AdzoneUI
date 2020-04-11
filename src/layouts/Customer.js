@@ -21,6 +21,7 @@ import AddProduct from "views/UserProfile/AddProduct";
 import EditProfile from 'components/EditProfile';
 import UserForm from "views/UserProfile/UserForm";
 import Email from "components/Email";
+import ViewProductDetails from "product/ViewProductDetails";
 // import { isPropertySignature } from "typescript";
 
 let ps;
@@ -31,10 +32,11 @@ const switchRoutes = (
 
     {/* http://localhost:3000/publicity/report?productId=1&publicityId=1&email=chavdagunjan01@gmail.com */}
     {/* <Route path="/publicity/report/:productId&:publicityId&:email" component={Email} /> */}
-    <Route path="/publicity/report" component={Email} />
+    <Route path="/customer/report" component={Email} />
+    <Route path="/customer/view-product/:productId" component={ViewProductDetails} />
 
 
-    <Route path="/publicity/profile/edit" component={UserForm} />
+    <Route path="/customer/profile/edit" component={UserForm} />
     {customerRoutes.map((prop, key) => {
       if (prop.layout === "/customer") {
         return (
@@ -57,6 +59,24 @@ const switchRoutes = (
 const useStyles = makeStyles(styles);
 
 export default function Customer({ ...rest }) {
+
+//  console.log(rest);
+  let userData = localStorage.getItem("userData");
+  if(userData){
+      let user = JSON.parse(userData);
+      if(user.role===0)
+         rest.history.push("/admin/dashboard")
+      else if(user.role===1)
+         rest.history.push("/publicity/dashboard")
+      else if(user.role===2)
+          console.log("right");
+      else    
+          rest.history.push("/login");
+  }
+  else{
+    alert("login First")
+    rest.history.push("/login");
+  }
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -114,7 +134,7 @@ export default function Customer({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={customerRoutes}
-        logoText={"adzone"}
+        logoText={"USER"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

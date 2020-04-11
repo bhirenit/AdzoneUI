@@ -50,17 +50,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
   const [user, setUser] = useState(2);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [signUp,setSignUp] = useState("/publicity-sign-up")
 
   const userList = [
 			{ value: 1, label: "Publicity" },
 			{ value: 2, label: "Customer" },
       ];
+
+  const pubLink = "/publicity-sign-up";
+  const cusLink = "/customer-sign-up"
    
+  const signUpPage = () =>
+  {
+    props.history.push(signUp);
+  }
 
   const submitHandler = (e) =>{
     e.preventDefault();
@@ -72,8 +80,16 @@ export default function SignIn() {
       .then(res =>{
         if(res.status===200){
           console.log("Response of login ",res);
-          localStorage.setItem("userData",res.data);
+          localStorage.setItem("userData",JSON.stringify(res.data));
           alert("Welcome "+res.data.userName);
+          if(res.data.role===0)
+             props.history.push("/admin/dashboard")
+          else if(res.data.role===1)
+             props.history.push("/publicity/dashboard")
+          else if(res.data.role===2)
+             props.history.push("/customer/dashboard")
+          else    
+            console.log("error");
         }
         else if(res.status===203){
           alert("Invalid Credentials");
@@ -91,13 +107,21 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-       {user==1?(<Avatar className={classes.avatar} onClick={() => {user==1?setUser(2):setUser(1)}}>
+       {user==1?(<Avatar className={classes.avatar} onClick={() => {
+         user==1?setUser(2):setUser(1);
+         user==1?setSignUp(cusLink):setSignUp(pubLink);        
+         }}>
           <SwitchCameraIcon  />
         </Avatar>):
-        (<Avatar className={classes.avatar} onClick={() => {user==1?setUser(2):setUser(1)}}>
+        (<Avatar className={classes.avatar} onClick={() => {
+          user==1?setUser(2):setUser(1);
+          user==1?setSignUp(cusLink):setSignUp(pubLink);}}>
           <LockOutlinedIcon  />
         </Avatar>)}
-        <Typography component="h1" variant="h5" onClick={() => {user==1?setUser(2):setUser(1)}}  >
+        <Typography component="h1" variant="h5" onClick={() => {
+          user==1?setUser(2):setUser(1);
+          user==1?setSignUp(cusLink):setSignUp(pubLink);
+          }}  >
        {/* <DropDown
 										name='user'
                     list={userList}
@@ -151,7 +175,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link onClick={signUpPage} variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

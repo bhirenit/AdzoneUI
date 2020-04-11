@@ -54,7 +54,7 @@ export default function AdminNavbarLinks(props) {
 
   const handleLogout=()=>{
     handleCloseProfile();
-    localStorage.removeItem("id");
+    localStorage.removeItem("userData");
 		props.history.push('/login');
   }
 
